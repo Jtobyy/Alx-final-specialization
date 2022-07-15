@@ -1,0 +1,215 @@
+<div class="container-fluid px-5 py-3">
+    <div class="row">
+        <div class="col-12 d-flex flex-row
+        align-items-center py-2 ">
+            <h4>Overview</h4>    
+            <p class="ml-5 text-muted">Show:</p>
+            
+            <input id="month_value" type="hidden" value="{{ month }}"/>
+            <select id="month" onchange=customDashboard() class="form-select month-filter mx-2 mb-3" aria-label="Month">
+                <option value="0" selected>This month</option>    
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+            <select id="year" class="form-select year-filter mx-2 mb-3" disabled>
+                <option value="2022">2022</option>
+            </select>
+        </div>    
+    </div>
+    <div class="row mt-3 row-2">
+        <div class="col shadow px-4 mx-3 pt-4 pb-1 bg-white rounded position-relative">
+            <div class="text-muted">Today's Revenue</div>
+            <h2 class="text-dark">N{{ today_revenue|floatformat:1 }}K</h2>
+            <span class="position-absolute percentage
+            {% if daily_per_diff_rev > 0 %} ctext-success text-success {% else %} ctext-danger text-danger {% endif %}" id="today_revenue">
+            {% if daily_per_diff_rev >= 0 %}
+                +{{ daily_per_diff_rev|floatformat:2 }}%
+            {% else %}
+                {{ daily_per_diff_rev|floatformat:2 }}%
+            {% endif %}
+            </span>
+        </div>
+        <div class="col shadow px-4 mx-3 pt-4 pb-1 bg-white rounded">
+            <div class="text-muted">Total Visitors</div>
+            <h2 class="text-dark">{{ visitors }}</h2>
+            <span class="position-absolute percentage
+            {% if month_per_diff_vis > 0 %} ctext-success text-success {% else %} ctext-danger text-danger {% endif %}" id="today_revenue">
+            {% if month_per_diff_vis >= 0 %}
+                +{{ month_per_diff_vis|floatformat:2 }}%
+            {% else %}
+                {{ month_per_diff_vis|floatformat:2 }}%
+            {% endif %}
+            </span>
+        </div>
+        <div class="col shadow px-4 mx-3 pt-4 pb-1 bg-white rounded">
+            <div class="text-muted">Products sold</div>
+            <h2 class="text-dark">{{ products_sold }}</h2>
+            <span class="position-absolute percentage
+            {% if month_per_diff_order > 0 %} ctext-success text-success {% else %} ctext-danger text-danger {% endif %}" id="today_revenue">
+            {% if month_per_diff_order >= 0 %}
+                +{{ month_per_diff_order|floatformat:2 }}%
+            {% else %}
+                {{ month_per_diff_order|floatformat:2 }}%
+            {% endif %}
+            </span>
+        </div>
+        <div class="col shadow px-4 mx-3 pt-4 pb-1 bg-white rounded">
+            <div class="text-muted">Total Revenue</div>
+            <h2 class="text-dark">N{{ total_revenue|floatformat:1}}k</h2>    
+            <span class="position-absolute percentage
+            {% if month_per_diff_rev > 0 %} ctext-success text-success {% else %} ctext-danger text-danger {% endif %}" id="today_revenue">
+            {% if month_per_diff_rev >= 0 %}
+                +{{ month_per_diff_rev|floatformat:2 }}%
+            {% else %}
+                {{ month_per_diff_rev|floatformat:2 }}%
+            {% endif %}
+            </span>
+        </div>
+    </div>
+    <div class="row mt-5 row-3">
+        <div class="col shadow d-flex bg-white shadow rounded mx-3 p-4">
+            <div class="flex-grow-1 mx-0" style="width: 32%;">
+                <div class="d-flex align-items-center">
+                    <h5>Earning Revenue</h5>
+                    
+                    <select id="week" class="form-select year-filter ml-auto position-relative" 
+                    style="right: 33px;" disabled>
+                        <option value="this_week">this week</option>
+                    </select>
+                </div>
+                <div class="col-content pr-3" id='chrats'>
+                    <canvas id="earningChart" width="100" eight="200"></canvas>
+                    <script>
+                    var earnings = {{ days_earnings|safe }}
+                    var ctx_e = document.getElementById('earningChart').getContext('2d');
+                    var earningsChart = new Chart(ctx_e, {
+                        type: 'line',
+                        data: {
+                            labels: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
+                            datasets: [{
+                                label: 'Earnings',
+                                data: [earnings['Mon'], earnings['Tue'], earnings['Wed'], earnings['Thu'], earnings['Fri'],
+                                earnings['Sat'], earnings['Sun']],
+                                tension: 0.3,
+                                borderColor: 'purple',
+                                hoverBorderColor: 'green',
+                                pointHoverBackgroundColor: 'purple',
+                                pointHoverBorderColor: 'white',
+                                pointHoverRadius: '10',
+                                pointHoverBorderWidth: '5',
+                                hoverBackgroundColor: 'rgb(181, 137, 223)',
+                                backgroundColor: 'rgb(243, 110, 205)',
+                                borderWidth: 1,
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                </script>
+                </div>
+            </div>
+            <div class="flex-grow-1 flex-1 mx-3">
+                <div class="d-flex align-items-center">
+                    <h5>Sales by category </h5>
+                    <select id="week" class="form-select year-filter ml-auto position-relative" 
+                    style="right: -12px;" disabled>
+                        <option value="this_week">this week</option>
+                    </select>
+                </div>    
+                <div>
+                    <canvas id="salesChart" width="100" height="200"></canvas>
+                    <script>
+                    var sales = {{ week_sales|safe }}    
+                    var ctx_s = document.getElementById('salesChart').getContext('2d');
+                    var salesChart = new Chart(ctx_s, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Cyberstick V1', 'HD webcam', 'Cyberstick remote', 'Cyberstick V2'],
+                            datasets: [{
+                                label: 'Sales',
+                                data: [sales['1'], sales['2'], sales['3'], sales['4']],
+                                backgroundColor: [
+                                    'purple',
+                                    'rgb(236, 30, 177)',
+                                    'rgb(219, 222, 53)',
+                                    'rgb(162, 241, 136)',
+                                ],
+                                hoverOffset: 4,
+                                
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5 row-4">
+        <div class="col shadow d-flex bg-white shadow rounded mx-3 p-4">
+            <div class="flex-grow-1">
+                <div class="d-flex align-items-center w-100">
+                    <h5>Recent Orders</h5>
+                    <a href="{% url 'orders' %}" class="ml-auto" target="_blank">
+                        <button class="mx-2 mb-3 btn btn-light" style="background-color: rgb(243, 243, 243);" type="button" >
+                            View details
+                        </button>
+                    </a>
+                </div>
+                
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">SERIAL NUMBER</th>
+                            <th scope="col">PRODUCT NAME</th>
+                            <th scope="col" class="text-muted">CUSTOMER NAME</th>
+                            <th scope="col">PRODUCT ID</th>
+                            <th scope="col">PRICE (NGN)</th>
+                            <th scope="col" class="text-muted">STATUS</th>
+                        </tr>    
+                    </thead>    
+                    <tbody>
+                        {% for order in  recent_orders %}    
+                        <tr>
+                            <td>#{{ order.id }}</td>
+                            <td><b>{{ order.item }}</b></td>
+                            <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
+                            <td>#1</td>
+                            <td>NGN {{ order.total_price }}</td>
+                            <td>
+                              <div class="{{order.get_status_display}} p-2 text-center rounded">
+                                {% if order.get_status_display == 'completed' %}
+                                  Delivered {% elif order.get_status_display == 'made' %} 
+                                  Pending (nv) {% else %} {{ order.get_status_display|capfirst }} {% endif %}
+                              </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>    
+                
+            </div>    
+        </div>
+    </div>
+</div>

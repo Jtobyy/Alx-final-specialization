@@ -1,0 +1,55 @@
+{% load i18n static %}
+{% if result_hidden_fields %}
+<div class="hiddenfields">{# DIV for HTML validation #}
+{% for item in result_hidden_fields %}{{ item }}{% endfor %}
+</div>
+{% endif %}
+{% if results %}
+
+<table class="table">
+  <thead>
+    <tr>
+      {% for header in result_headers|slice:'1:' %}
+      <th scope="col">
+        {{ header.text|capfirst }}
+      </th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+  {% for result in results %}
+  {% if result.form and result.form.non_field_errors %}
+      <tr><td colspan="{{ result|length }}">{{ result.form.non_field_errors }}</td></tr>
+  {% endif %}
+  
+  <tr class="order_data">{% for item in result|slice:'1:-1' %}
+  {{ item|capfirst }}  
+  {% endfor %}
+  {{ result|last|capfirst }}
+  </tr>
+  {% if order.get_status_display == 'completed' %}
+  Delivered {% elif order.get_status_display == 'made' %} 
+  Pending (nv) {% else %} {{ order.get_status_display|capfirst }} {% endif %}
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endif %}
+<script src="{% static 'jquery.min.js' %}" ></script>
+<script>
+  let order_status = $('.order_data .field-status')
+  $.each(order_status, function( index, value ) {
+  if (value.innerHTML == 'made') {
+    value.innerHTML = '<div class=\'pending p-2 text-center rounded\'>Pending(nv)</div>'
+  } else if (value.innerHTML == 'pending') {
+    value.innerHTML = '<div class=\'pending p-2 text-center rounded\'>Pending</div>'
+  } else if (value.innerHTML == 'delivered') {
+    value.innerHTML = '<div class=\'delivered p-2 text-center rounded\'>Delivered</div>'
+  }});
+
+  let stock_data = $('.field-stock')
+  $.each(stock_data, function( index, value ) {
+    if (value.innerHTML == 'In stock') value.classList.add('text-success') 
+    else value.classList.add('text-danger')
+  });
+</script>

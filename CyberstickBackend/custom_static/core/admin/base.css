@@ -1,0 +1,142 @@
+@import url(font/stylesheet.css);
+
+:root {
+    --secondary: black;
+    --body-bg: #fff;
+    --body-fg: black;
+    --body-quiet-color: black;
+    --border-color: rgb(244, 244, 244);
+}
+.table *{
+    border-color: var(--border-color);
+    background-color: white !important;
+}
+a {
+    color: purple !important;
+}
+td, th {
+    vertical-align: middle !important;    
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+    border-top: 0px !important;
+}
+#header {
+    background-color: black;
+}
+body {
+    font-family: 'Quatro' !important;
+}
+.bg-black {
+    background-color: black !important;
+}
+#content {
+    padding: 0px;
+}
+
+.dashboard #content {
+    width: 100%;
+    min-height: 100%;
+}
+
+.hidden {
+    display: none !important;
+}
+.active-section {
+    background: linear-gradient(to right, #EC1EB1, #EC1EB1, #5E01BA, #5E01BA, black, black) !important;
+}
+.section-pointer {
+    height: 30px;
+    right: -1px;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+}
+.sidebar-icon {
+    height: 20px;
+}
+#user-tools {
+    margin: 0 0 0 20px;
+    position: relative;
+    top: 17%;
+    font-weight: 300;
+    font-size: 11px;
+    color: white;
+    letter-spacing: 0.5px;
+    text-transform: none;
+    text-align: left;
+}
+#profile-image {
+    height: 35px;
+    width: 35px;
+    right: 60px;   
+}
+.form-select {
+    font-size: .8rem !important;
+}
+.month-filter {
+    border: 1px solid purple !important;
+    background-color: white !important;
+    color: purple !important;
+}
+.row .col {
+    transition: all .3s;
+}
+.row .col:hover {
+    transform: scale(1.02);
+}
+.row-3 .col {
+    min-height: 60vh;
+}
+.row-3 .col .col-content {
+    border-right: solid 1px rgb(244, 244, 244);
+}
+h5 {
+    color: black;
+    text-transform: none;
+}
+.flex-1 {
+    flex: 1;
+}
+.flex-2 {
+    flex: 2;
+}
+.made,
+.pending {
+    background-color: red !important;
+    color: white;
+}
+.delivered {
+    background-color: rgb(69, 183, 28) !important;
+    color: white;
+}
+.canceled {
+    background-color: rgb(218, 218, 218) !important;
+    color: rgb(124, 122, 122);
+}
+.percentage {
+    top: 10px;
+    right: 20px;
+    font-size: small;
+}
+.ctext-success::before {
+    content: "\2191";
+}
+.ctext-danger::before {
+    content: "\2193";
+}
+
+/* object tools */
+
+.add-data-btn:hover {
+    background-color: rgb(252, 241, 252) !important;
+}
+#form-picture {
+    width: 120px;
+    height:120px;
+}
+
+.css-less-than::before {
+    content: '\003C';
+    font-size: 30px;
+    color: #5E01BA;
+}

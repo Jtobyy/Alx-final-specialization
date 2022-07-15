@@ -1,0 +1,38 @@
+{% load static %}
+<div class="row w-100">  
+    <div class="col shadow bg-white rounded mx-3 px-5 pt-5 pb-4 w-100">
+        
+        {% for fieldset in adminform %}
+        {% for line in fieldset %}
+        {% for field in line %}
+        {% with field.label_tag as label_tag %}
+        {% with field.field as field %}
+        {% if label_tag == '<label class="required" for="id_name">Product name:</label>' %}
+        <div class="form-group">
+            <label>Product title</label>
+            {{ field }}
+        </div>
+        {% elif label_tag == '<label class="required" for="id_description">Description:</label>' %}
+        <div class="form-group">
+            <label>Description</label>
+            {{ field }}
+        </div>
+        {% elif label_tag == '<label>Product pic:</label>'>Image:</label>' %}
+        {% elif label_tag == '<label class="required" for="id_image">Image:</label>' %}
+        <div class="form-group">
+            <img src="" alt="product image" id="image_pic">
+            
+            {{ field }}
+        </div>
+        {% endif %}
+        <script>  
+            tag = '{{label_tag}}'
+            console.log(tag)
+        </script>
+        {% endwith %}{% endwith %}
+        {% endfor %}
+        {% endfor %}
+        {% endfor %}
+        </div>
+    </div>
+</div>

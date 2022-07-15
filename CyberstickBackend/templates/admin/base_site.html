@@ -1,0 +1,39 @@
+{% extends "admin/base.html" %}
+{% load i18n static %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static "base.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "bootstrap.min.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "nav_sidebar.css" %}">
+
+<script src="{% static 'jquery.min.js' %}" defer></script>
+
+<script src="{% static 'bootstrap.bundle.min.js' %}" defer></script>
+<script src="{% static 'chart.min.js' %}" defer></script>
+
+<script src="{% static 'nav_sidebar.js' %}" defer></script>
+
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a onclick=getIndex()><img style="width: 10vw; margin-top: 10px; margin-left: -10px;
+    "  src="{% static 'Group_20logo.png' %}" /></a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+
+{% block welcome-msg %}
+    {% if user.image %}
+        <img src="{{ user.image.url }}" class="rounded-circle py-0 position-absolute" id="profile-image" />  
+    {% else %}
+        <img src="{% static 'avatar-icon-images-4.jpg' %}" class="rounded-circle py-0 position-absolute" id="profile-image" />  
+    {% endif %}
+    <strong>{% firstof user.get_short_name user.get_username %}</strong>
+    <strong>{{ user.last_name|first }}</strong>.
+{% endblock %}
+{% block userlinks %}
+    <p >Admin</p>
+{% endblock %}

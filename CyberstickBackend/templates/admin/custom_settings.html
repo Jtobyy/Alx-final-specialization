@@ -1,0 +1,68 @@
+{% load static %}
+<div class="container-fluid px-5 py-3">
+    <div class="row">
+        <div class="col-12 d-flex flex-row
+        align-items-center py-2 ">
+            <h4>Settings</h4>
+        </div> 
+    </div>
+    <div class="row mt-3">
+        <div class="col shadow px-4 mx-3 pt-4 pb-1 bg-white rounded position-relative">
+            <form method="post" action="{% url 'custom_settings' %}" enctype="multipart/form-data" class="px-4 pb-5 pt-4 position-relative">
+            {% csrf_token %}    
+                <div class="row">
+                    <div class="col-4">
+                        <label>First Name</label>
+                        <input value="{{ request.user.first_name }}" class="form-control" type="text" name="first_name">
+                    </div>
+                    <div class="col-4">
+                        <label>Last Name</label>
+                        <input value="{{ request.user.last_name }}" class="form-control" type="text" name="last_name">
+    "                </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-4">
+                        <label>Email</label>
+                        <input value="{{ request.user.email }}" class="form-control" type="email" name="email">
+                    </div>
+                    <div class="col-4">
+                        <label>Phone</label>
+                        <input value="{{ request.user.phone_number }}" class="form-control" type="number" name="phone">
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-8">    
+                        <label>Address</label>
+                        <input value="{{ request.user.address }}" class="form-control" type="text" name="address">
+                    </div>
+                </div>
+                <button class="col-3 btn btn-dark my-5 py-2" style="background-color: rgb(94, 1, 186);">
+                    Save
+                </button>
+                <div class="position-absolute" style="right: 100px; top: 30px;">
+                    {% if request.user.image %}
+                        <img src="{{ request.user.image.url }}" class="rounded-circle " id='form-picture'/>  
+                    {% else %}
+                        <img src="{% static 'avatar-icon-images-4.jpg' %}" class="rounded-circle"  id='form-picture'/>  
+                    {% endif %}
+                    <input type="file" name="image" id="hidden-upload" class="hidden" >
+                    <img src="{% static 'image_upload.png' %}" style="display: block; cursor: pointer;"
+                    class="mx-4 my-3" id='picture-upload' onclick=getImage() />
+                    <div class="hidden" style="width: 150px;" id="file_name"></div>
+                </div>
+            </form>    
+        </div>    
+    </div>
+</div>
+
+<script>
+    function getImage() {
+        $('#hidden-upload').click()
+    }
+    
+    $('#hidden-upload').change((e) => {
+        $('#file_name').html(e.target.value)
+        $('#file_name').removeClass('hidden')
+    })
+</script>

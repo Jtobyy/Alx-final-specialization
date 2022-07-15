@@ -1,0 +1,14 @@
+{% load i18n admin_urls %}
+
+{% block object-tools-items %}
+  {% if has_add_permission %}
+  <li style="list-style-type: none;">
+    {% url cl.opts|admin_urlname:'add' as add_url %}
+    <a href="{% add_preserved_filters add_url is_popup to_field %}">
+      <button class="month-filter ml-3 mb-2 btn add-data-btn">
+          {% blocktranslate with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktranslate %}
+      </button>
+    </a>
+  </li>
+  {% endif %}
+{% endblock %}

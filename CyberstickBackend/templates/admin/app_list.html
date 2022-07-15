@@ -1,0 +1,66 @@
+{% load i18n static %}
+
+{% if app_list %}
+  {% for app in app_list %}
+    <div class="app-{{ app.app_label }} module{% if app.app_url in request.path|urlencode %} current-app{% endif %}">
+      <table style="width: 220px;">
+        <tr>
+          <th class="position-relative" scope="row"style="background-color: black; 
+          border: 0px; padding: 8px 0px; padding-left: 20px; cursor: pointer;
+          border-bottom: 25px solid black;" onclick=showSection(this)>
+            <a id="dashboard-cell" class="dontclick" style="color: white; text-decoration: none; padding-left: 15px;" 
+            href="{% url 'admin:index' %}" />
+              <img src="{% static 'ic_outline-dashboard.png' %}" class="mr-3 sidebar-icon"/> Dashboard
+            </a>
+            <img class="section-pointer hidden" src="{% static 'Polygon.png' %}" />
+          </th>
+        </tr>
+        {% for model in app.models %}
+        <tr class="model-{{ model.object_name|lower }}{% if model.admin_url in request.path|urlencode %} current-model{% endif %}">
+            {% if model.admin_url %}
+            <th class="position-relative" scope="row" style="background-color: black; border: 0px; padding: 8px 0px; padding-left: 20px; cursor: pointer;
+            border-bottom: 25px solid black;" onclick=showSection(this)>
+              <a class="dontclick" style="color: white;  padding-left: 15px; text-decoration: none;" href="{{ model.admin_url }}"{% if model.admin_url in request.path|urlencode %} aria-current="page"{% endif %}>  
+              {% if model.name == 'Orders' %}  
+                <img src="{% static 'cart.png' %}" class="mr-3 sidebar-icon"/>
+              {% elif model.name == 'Customers' %}  
+                <img src="{% static 'customers.png' %}" class="mr-3 sidebar-icon"/>
+              {% elif model.name == 'Products' %}  
+                <img src="{% static 'product.png' %}" class="mr-3 sidebar-icon"/>
+              {% endif %}
+              {{ model.name }}
+              </a>
+              <img class="section-pointer hidden" src="{% static 'Polygon.png' %}" />
+            </th>
+            {% else %}
+              <th scope="row">{{ model.name }}</th>
+            {% endif %}
+
+
+            {% if model.admin_url and show_changelinks %}
+              {% if model.view_only %}
+                <td><a href="{{ model.admin_url }}" class="viewlink">{% translate 'View' %}</a></td>
+              {% else %}
+                <td><a href="{{ model.admin_url }}" class="changelink">{% translate 'Change' %}</a></td>
+              {% endif %}
+            {% elif show_changelinks %}
+              <td></td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+        <tr>
+          <th class="position-relative" scope="row"style="background-color: black; border: 0px; padding: 8px 0px; padding-left: 20px; cursor: pointer;
+          border-bottom: 25px solid black;" onclick=showSection(this)>
+            <a class="dontclick" style="color: white; text-decoration: none; padding-left: 15px;" 
+            onclick="customSettings(this)" aria-current="page" id="settings">
+              <img src="{% static 'settings.png' %}" class="mr-3 sidebar-icon"/> Settings
+            </a>
+            <img class="section-pointer hidden" src="{% static 'Polygon.png' %}" />
+          </th>
+        </tr>
+      </table>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>{% translate 'You don’t have permission to view or edit anything.' %}</p>
+{% endif %}

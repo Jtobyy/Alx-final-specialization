@@ -1,0 +1,6 @@
+{% load i18n %}
+<button class="sticky toggle-nav-sidebar hidden" id="toggle-nav-sidebar" aria-label="{% translate 'Toggle navigation' %}"></button>  
+<nav class="sidenav">
+{% include 'admin/app_list.html' with app_list=available_apps show_changelinks=False %}
+</nav>
+

@@ -1,0 +1,116 @@
+{% load static %}
+<div class="row w-100">  
+    <div class="col shadow bg-white rounded mx-3 px-5 pt-5 pb-4 w-100">
+      <div class="d-flex justify-content-between pb-4 flex-wrap">
+        <div class="" style="height: 120px;">
+          <img class=" mb-1" src="{% static 'fluent_people.png' %}" />
+          <span style="font-size: 1.1rem; font-weight: 500;">Customer</span>
+          {% for fieldset in adminform %}
+          {% for line in fieldset %}
+          {% for field in line %}
+          {% with field.label_tag as label_tag %}
+          {% with field.contents as contents %}
+          <p class="text-muted">
+            <span id="customer_name"></span></br><span id="customer_email"></span></br><span id="customer_phone"></span>
+          </p>
+          <script>
+            tag = '{{label_tag}}'
+            if (tag == '<label>Customer:</label>') document.querySelector('#customer_name').innerHTML='{{contents}}'
+            else if (tag == '<label>Customer email:</label>') document.querySelector('#customer_email').innerHTML='{{contents}}'
+            else if (tag == '<label>Customer phone:</label>') document.querySelector('#customer_phone').innerHTML='{{contents}}'
+          </script>
+          {% endwith %}{% endwith %}
+          {% endfor %}
+          {% endfor %}
+          {% endfor %}
+        </div>
+
+        <div class="" style="height: 120px;">
+          <img class="mb-1" src="{% static 'gridicons_shipping.png' %}"></img>
+          <span style="font-size: 1.1rem; font-weight: 500;">Shipping</span>
+          {% for fieldset in adminform %}
+          {% for line in fieldset %}
+          {% for field in line %}
+          {% with field.label_tag as label_tag %}
+          {% with field.contents as contents %}
+          <p class="text-muted">
+            <span id="payment_method"></span></br><span id="status"></span>
+          </p>
+          <script>  
+            tag = '{{label_tag}}'
+            if (tag == '<label>Payment method:</label>') document.querySelector('#payment_method').innerHTML='Payment method: {{contents|capfirst}}'
+            if (tag == '<label>Get status:</label>') document.querySelector('#status').innerHTML='Status: {{contents|capfirst}}'
+          </script>
+          {% endwith %}{% endwith %}
+          {% endfor %}
+          {% endfor %}
+          {% endfor %}
+        </div>
+
+        <div class="" style="height: 120px;">
+          <img class="mb-1" src="{% static 'ci_location.png' %}"></img>
+          <span style="font-size: 1.1rem; font-weight: 500;">Deliver to</span>
+          {% for fieldset in adminform %}
+          {% for line in fieldset %}
+          {% for field in line %}
+          {% with field.label_tag as label_tag %}
+          {% with field.contents as contents %}
+          <p class="text-muted">
+            <span id="city"></span></br><span id="street"></span></br><span id="zipcode"></span>
+          </p>
+          <script>  
+            tag = '{{label_tag}}'
+            if (tag == '<label>Customer city:</label>') document.querySelector('#city').innerHTML='City/State: {{contents|capfirst}}'
+            if (tag == '<label>Customer address:</label>') document.querySelector('#street').innerHTML='Street: {{contents|capfirst}}'
+            if (tag == '<label>Customer zipcode:</label>') document.querySelector('#zipcode').innerHTML='Zip code: {{contents|capfirst}}'
+          </script>
+          {% endwith %}{% endwith %}
+          {% endfor %}
+          {% endfor %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <table class="table col-md-8 bg-success border text-muted">
+        <thead>
+          <tr>
+            <th class="text-muted" scope="col">Product</th>
+            <th class="text-muted" scope="col">Quantity</th>
+            <th class="text-muted" scope="col">Unit price</th>
+            <th class="text-muted" scope="col">Total</th>
+          </tr>  
+        </thead>
+        <tbody>
+          {% for obj in linked_orders|slice:":-1" %}  
+          <tr>  
+            <td><img src='{{obj.product.image.url}}' style="height: 50px;" />{{obj.product.name}}</td>
+            <td>{{obj.quantity}}</td>
+            <td>NGN{{obj.unit_price}}</td>
+            <td>NGN{{obj.total}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <tbody>  
+          <tr>
+            <td></td>  
+            <td></td>
+            <td>Subtotal</td>  
+            <td>NGN{{ linked_orders|last }}</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Shipping</td>  
+            <td>Free</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>    
+            <td>Subtotal</td>  
+            <td>-</td>
+          </tr>
+        </tbody>  
+      </table>
+    </div>
+  </div>
+</div>

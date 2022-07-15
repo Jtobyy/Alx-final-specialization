@@ -1,0 +1,29 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}">
+{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block nav-sidebar %}{{block.super}}{% endblock %}
+
+{% block content %}
+<div id="content-main">
+  {% include 'admin/custom_dashboard.html' %}
+  <script src="{% static 'jquery.min.js' %}" ></script>
+  <script>
+    d = new Date()
+    let month = $('#month').val()
+    if (month == 0 || month == '') month = d.getMonth() + 1
+    $.get('/cyberstickadmin/custom_dashboard/?month='+month, (res) => {    
+        $('#content').html(res)
+        $('.section-pointer').addClass('hidden');
+        $('#dashboard-cell').next().removeClass('hidden');
+        $('#month').val($('#month_value').val())
+    })    
+  </script>
+</div>
+{% endblock %}
+

@@ -1,0 +1,108 @@
+/* LOGIN FORM */
+
+.login {
+    background: url(/static/loginbg.png);
+    height: auto;
+}
+
+.login #header {
+    height: auto;
+    padding: 15px 16px;
+    padding-bottom: 0;
+    justify-content: center;
+    background-color: transparent !important;
+    color: white !important;
+}
+
+.login #header h1 {
+    margin: 0;
+    font-size: 50px !important;
+    font-weight: 700;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: white !important;
+}
+
+.login #header h1 a {
+    color: var(--header-link-color);    
+}
+
+.login #header h1 span {
+    background: linear-gradient(to right, rgb(194, 24, 135), rgb(247, 65, 95));    
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+
+.login #content {
+    padding: 20px 20px 0;
+}
+
+.login #container {
+    background-color: transparent;
+    text-align: center;
+    overflow: hidden;
+    width: 28em;
+    min-width: 300px;
+    margin: 100px auto;
+    height: auto;
+}
+.login .form-row {
+    padding: 4px 0;
+    color: rgba(255, 255, 255, .8)
+}
+.login .form-row input{
+    background-color: black !important;
+}
+
+.login .form-row label {
+    display: block;
+    line-height: 2em;
+}
+
+.login .form-row #id_username, .login .form-row #id_password {
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.login .submit-row {
+    padding: 1em 0 0 0;
+    margin: 0;
+    text-align: center;
+}
+
+.login .password-reset-link {
+    text-align: center;
+}
+
+
+/* Custom styles */
+.logo {    
+    margin-top: -10px;
+}
+.forgot-p {
+    color: #5E01BA;
+    font-weight: 600;
+    text-align: right;
+    transition: all .3s;
+}
+.forgot-p:hover {
+    cursor: pointer;
+}
+.show-password {
+    top: 0 !important;
+    background-color: red !important;
+}
+.btn-gradient {
+    background: linear-gradient(to right, #EC1EB1, #5E01BA, #5E01BA) !important;
+    width: 100%;
+    transition: all .2s;
+}
+.btn-gradient:hover {
+    transition: all .2s;    
+    transform: scale(.97);
+}
+.bg-transparent {
+    background-color: transparent !important;
+    background: transparent !important;
+}
