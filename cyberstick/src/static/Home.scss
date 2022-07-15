@@ -1,0 +1,226 @@
+.home-p {
+    font-size: 1rem;
+}
+.landing {
+    text-align: center;
+    position: relative;
+    background-color: black;
+    font-family: 'Quatro' !important;
+}
+.home-section-1 {
+    background-image: url('../static/homebg.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: fit-content;
+}
+.think-text1,
+.think-text2 {
+    font-weight: 350;
+    font-size: 2rem;
+}
+.think-text2 {
+    position: relative;
+    top: -10px;
+    background: linear-gradient(to right, #EC1EB1, #EC1EB1, #5E01BA, #5E01BA);    
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+.cyberstick {    
+    position: relative;    
+    right: 5vw;
+    margin-top: -10px;
+    height: calc(35vw + 50px);
+}
+.home-section-1-footer {
+    background-color: rgba(0, 0, 0, .5);   
+    height: 200px;
+}
+.section-2 {
+    background-color: black;
+    height: fit-content;
+}
+.unlock {
+    font-weight: 350;
+    font-size: 2rem;
+}
+.unlock span {
+    background: linear-gradient(to right, #EC1EB1, #EC1EB1, #5E01BA);    
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+.unlock:first-child {
+    margin-top: -70px;
+}
+.unlock:nth-child(2) {
+    position: relative;    
+    top: -10px;
+}
+.buynowbtn {
+    position: relative;    
+    top: 40px;
+    height: 55px;
+    width: calc(20vw + 50px);
+    border-radius: 7px;
+    font-size: .8rem;
+    background: linear-gradient(to right, #EC1EB1, #EC1EB1, #5E01BA, #5E01BA);
+    -webkit-text-fill-color: white;
+    transition: all .2s;
+}
+.buynowbtn:hover {
+    transform: scale(.97);
+}
+.tvbg1 {
+    height: calc(30vw + 50px);
+    z-index: 5;
+    margin-top: 140px;
+}
+.section-3 {
+    background-color: white;
+    height: fit-content;
+    position: relative;
+    top: -70px;
+    color: black;
+    padding-top: 270px;
+}
+.make {
+    font-weight: 400;
+    font-size: 2rem;
+    height: fit-content;
+    margin-top: -130px;    
+}
+.section-3 h1 {
+    color: black;
+}
+.fourth-p {
+    margin-top: 10px !important;
+    width: 50vw;
+}
+.buynowbtn2 {
+    top: 25px;
+    border-color: white;
+}
+.tvbg2 {
+    margin-top: 100px;
+    margin-bottom: 80px;
+}
+.section-4 {
+    background-color: black;
+    height: fit-content;
+    position: relative;
+    top: -100px;
+    padding-top: 50px;
+    padding-left: 7vw;
+    padding-right: 7vw;
+    padding-bottom: 0px;
+}
+.ready {
+    font-weight: 400;
+    font-size: 2rem;
+}
+.ready:nth-child(2) {
+    background: linear-gradient(to right, #EC1EB1 40%, #5E01BA);    
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;   
+    position: relative;
+    top: -10px;
+}
+.steparrow1-wrapper {
+    margin-top: 20px;
+    width: 100vw;
+    text-align: center;
+}
+.steparrow1,
+.steparrow2 {
+    width: 70vw;
+}
+.steparrow1 {
+    position: relative;
+    left: calc(98.5% - 100%);
+}
+.steparrow2 {
+    position: relative;
+    right: calc(98.5% - 100%);
+}
+.section-4 section {
+    margin-top: 30px;
+}
+
+@media screen and (max-width: 768px) {
+    .buynowbtn {
+        width: 100%;
+    }    
+    .cyberstick-wrapper {        
+        position: relative;
+        top: 100px;
+    }
+    .home-section-1-row {
+        margin-top: 140px;
+    }
+    .cyberstick {    
+        position: relative;    
+        right: 0vw;
+        margin-top: 0px;
+        height: calc(35vw + 100px);
+    }    
+    .unlock:first-child {
+        margin-top: -170px;
+    }    
+    .fourth-p {
+        width: 80vw;
+    }           
+}
+
+
+// medium screens
+@media screen and (min-width: 600px) {
+    .think-text1,
+    .think-text2,
+    .unlock,
+    .make,
+    .ready {
+        font-size: 3rem;  
+}
+.make {
+    margin-top: 0;    
+}
+.tvbg2 {
+    margin-bottom: 30px;
+}
+.section-3 {
+    top: -160px;
+}
+.stepwrapper {
+    margin-top: -70px;
+}
+.stepwrapper div {
+    margin: 10px 20px;
+}
+}
+
+@media screen and (min-width: 1000px) {
+    .think-text1,
+    .think-text2,
+    .unlock,
+    .make,
+    .ready {
+        font-size: 3.5rem;  
+    }   
+    .home-p {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .home-section-1-footer {
+        background-color: rgba(0, 0, 0, .5);   
+        height: 250px;
+        margin-top: -190px;
+    }
+}
+    
+@media screen and (min-width: 700px) {
+    .stepwrapper div {
+        margin: 10px 40px;
+    }    
+}
